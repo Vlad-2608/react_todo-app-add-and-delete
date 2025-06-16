@@ -1,11 +1,8 @@
-import { TodoStatus } from '../TodoStatus';
-import { TodoTitle } from '../TodoTitle/TodoTitle';
+import React, { useState } from 'react';
 import { Todo } from '../../types/Todo';
+import { TodoStatus } from '../TodoStatus';
 import { TodoLoader } from '../TodoLoader';
-import { TodoDelete } from '../TodoDelete';
-import { useState } from 'react';
 import { TodoEdit } from '../TodoEdit';
-import React from 'react';
 
 interface TodoElementProps {
   todo: Todo;
@@ -45,6 +42,7 @@ export const TodoElement: React.FC<TodoElementProps> = ({
 
       setEditedTitle(editedTitle);
       setIsEditing(false);
+
       handleUpdateTodo(updateTodos);
     }
   };
@@ -60,7 +58,6 @@ export const TodoElement: React.FC<TodoElementProps> = ({
   const loading = !todo.isLoaded;
 
   return (
-    /* This is a completed todo Remove button appears only on hover overlay will cover the todo while it is being deleted or updated */
     <div data-cy="Todo" className={`todo ${todo.completed ? 'completed' : ''}`}>
       <TodoStatus
         isCompletedTodo={todo.completed}
@@ -75,10 +72,25 @@ export const TodoElement: React.FC<TodoElementProps> = ({
           editedTitle={editedTitle}
         />
       ) : (
-        <TodoTitle title={editedTitle} onDoubleClick={handleDoubleClick} />
+        <span
+          data-cy="TodoTitle"
+          className="todo__title"
+          onDoubleClick={handleDoubleClick}
+        >
+          {editedTitle}
+        </span>
       )}
 
-      {!isEditing && <TodoDelete onDelete={() => handleTodoDelete(todo.id)} />}
+      {!isEditing && (
+        <button
+          type="button"
+          className="todo__remove"
+          data-cy="TodoDelete"
+          onClick={() => handleTodoDelete(todo.id)}
+        >
+          ×
+        </button>
+      )}
 
       <TodoLoader loading={loading} />
     </div>

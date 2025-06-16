@@ -6,7 +6,6 @@ interface TodoLoaderProps {
 
 export const TodoLoader: React.FC<TodoLoaderProps> = ({ loading }) => {
   return (
-    /* 'is-active' class puts this modal on top of the todo */
     <div
       data-cy="TodoLoader"
       className={`modal overlay ${loading ? 'is-active' : ''}`}

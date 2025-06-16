@@ -1,32 +1,31 @@
-import { useState } from 'react';
 import { FilterType } from '../../types/Filter';
 import classNames from 'classnames';
 import React from 'react';
 
 interface FilterProps {
   setFilterStyle: (style: FilterType) => void;
+  filterStyle: FilterType;
 }
 
-export const Filter: React.FC<FilterProps> = ({ setFilterStyle }) => {
-  const [activeStyle, setActiveStyle] = useState(FilterType.All);
-
+export const Filter: React.FC<FilterProps> = ({
+  setFilterStyle,
+  filterStyle,
+}) => {
   const handleFilterLink = (style: FilterType) => {
-    setActiveStyle(style);
     setFilterStyle(style);
   };
 
   const filterKey = Object.keys(FilterType);
 
   return (
-    /* Active link should have the 'selected' class */
     <nav className="filter" data-cy="Filter">
-      {filterKey.map((style, index) => (
+      {filterKey.map(style => (
         <a
-          key={index}
+          key={style}
           href="#/"
           className={classNames('filter__link', {
             selected:
-              activeStyle === FilterType[style as keyof typeof FilterType],
+              filterStyle === FilterType[style as keyof typeof FilterType],
           })}
           data-cy={`FilterLink${style}`}
           onClick={() =>

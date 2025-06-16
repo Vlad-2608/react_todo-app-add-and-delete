@@ -87,6 +87,7 @@ export const TodoappContent: React.FC<TodoappContentProps> = ({
       <TodoappFooter
         todos={todos}
         setFilterStyle={setFilterStyle}
+        filterStyle={filterStyle}
         handleClearCompletedButton={handleClearCompletedButton}
         inputRef={inputRef}
       />

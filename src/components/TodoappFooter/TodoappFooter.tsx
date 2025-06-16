@@ -8,6 +8,7 @@ import { FilterType } from '../../types/Filter';
 interface TodoappFooterProps {
   todos: Todo[];
   setFilterStyle: (style: FilterType) => void;
+  filterStyle: FilterType;
   handleClearCompletedButton: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
 }
@@ -15,6 +16,7 @@ interface TodoappFooterProps {
 export const TodoappFooter: React.FC<TodoappFooterProps> = ({
   todos,
   setFilterStyle,
+  filterStyle,
   handleClearCompletedButton,
 }) => {
   const todosLength = todos.filter(
@@ -27,11 +29,11 @@ export const TodoappFooter: React.FC<TodoappFooterProps> = ({
   }
 
   return (
-    /* Hide the footer if there are no todos */
     <footer className="todoapp__footer" data-cy="Footer">
       <TodosCounter todosCount={todosLength} />
 
-      <Filter setFilterStyle={setFilterStyle} />
+      {/* <Filter setFilterStyle={setFilterStyle} filterStyle={FilterType.All} /> */}
+      <Filter setFilterStyle={setFilterStyle} filterStyle={filterStyle} />
 
       <ClearCompletedButton
         todoCompleted={todoIsCompleted}

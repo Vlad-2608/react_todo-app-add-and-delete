@@ -18,6 +18,7 @@ export const TodoStatus: React.FC<TodoStatusProps> = ({
         checked={isCompletedTodo}
         aria-label="Toggle todo status"
         onClick={todoStatus}
+        // onChange={todoStatus}
       />
     </label>
   );
